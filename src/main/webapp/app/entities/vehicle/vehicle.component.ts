@@ -48,7 +48,10 @@ export class VehicleComponent implements OnInit, OnDestroy {
             model: {
                 title: 'Model'
             }
-        }
+        },
+        attr: {
+            class: 'table table-bordered table-success'
+              }
     };
 
     data: LocalDataSource;
