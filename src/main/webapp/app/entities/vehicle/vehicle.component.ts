@@ -6,27 +6,64 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { IVehicle } from 'app/shared/model/vehicle.model';
 import { Principal } from 'app/core';
 import { VehicleService } from './vehicle.service';
+import { LocalDataSource } from 'ng2-smart-table';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'jhi-vehicle',
     templateUrl: './vehicle.component.html'
 })
+
 export class VehicleComponent implements OnInit, OnDestroy {
     vehicles: IVehicle[];
     currentAccount: any;
     eventSubscriber: Subscription;
 
+    settings = {
+        actions: {
+            delete: false,
+            custom: [
+                {
+                    name: 'view',
+                    title: 'View '
+                },
+                {
+                    name: 'delete',
+                    title: 'Delete '
+                }
+            ]
+        },
+        columns: {
+            id: {
+                title: 'ID'
+            },
+            vehicle_number: {
+                title: 'Vehicle Number'
+            },
+            brand: {
+                title: 'Brand'
+            },
+            model: {
+                title: 'Model'
+            }
+        }
+    };
+
+    data: LocalDataSource;
+
     constructor(
         private vehicleService: VehicleService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
-        private principal: Principal
+        private principal: Principal,
+        private router: Router
     ) {}
 
     loadAll() {
         this.vehicleService.query().subscribe(
             (res: HttpResponse<IVehicle[]>) => {
                 this.vehicles = res.body;
+                this.data = new LocalDataSource(res.body);
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -54,5 +91,12 @@ export class VehicleComponent implements OnInit, OnDestroy {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+    onCustom(event) {
+        if (event.action === 'view') {
+            this.router.navigate(['vehicle/' + event.data.id + '/view']);
+        } else if (event.action === 'delete') {
+            this.router.navigate([{ outlets: { popup: 'vehicle/' + event.data.id + '/delete' } }]);
+        }
     }
 }
