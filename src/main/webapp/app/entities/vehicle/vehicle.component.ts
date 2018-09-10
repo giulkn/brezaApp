@@ -35,7 +35,9 @@ export class VehicleComponent implements OnInit, OnDestroy {
         },
         columns: {
             id: {
-                title: 'ID'
+                title: 'ID',
+                editable: false,
+                addable: false
             },
             vehicle_number: {
                 title: 'Vehicle Number'
