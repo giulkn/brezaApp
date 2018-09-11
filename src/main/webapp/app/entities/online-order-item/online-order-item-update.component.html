@@ -47,7 +47,7 @@
                     <label class="form-control-label" jhiTranslate="brezaApp.onlineOrderItem.article" for="field_article">Article</label>
                     <select class="form-control" id="field_article" name="article" [(ngModel)]="onlineOrderItem.article"  required>
                         <option *ngIf="!editForm.value.article" [ngValue]="null" selected></option>
-                        <option [ngValue]="articleOption.id === onlineOrderItem.article?.id ? onlineOrderItem.article : articleOption" *ngFor="let articleOption of articles; trackBy: trackArticleById">{{articleOption.name}} ({{articleOption.price}})</option>
+                        <option [ngValue]="articleOption.id === onlineOrderItem.article?.id ? onlineOrderItem.article : articleOption" *ngFor="let articleOption of articles; trackBy: trackArticleById">{{articleOption.name}} ({{articleOption.price}}) $</option>
                     </select>
                 </div>
                 <div [hidden]="!(editForm.controls.article?.dirty && editForm.controls.article?.invalid)">

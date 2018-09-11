@@ -1,5 +1,5 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CityService } from 'app/entities/city';
 import { ClientService } from 'app/entities/client';
@@ -15,7 +15,7 @@ import { OnlineOrderService } from './online-order.service';
     selector: 'jhi-online-order-update',
     templateUrl: './online-order-update.component.html'
 })
-export class OnlineOrderUpdateComponent implements OnInit {
+export class OnlineOrderUpdateComponent implements OnInit, OnDestroy {
     private _onlineOrder: IOnlineOrder;
     isSaving: boolean;
     isNewForm: boolean;
@@ -33,7 +33,7 @@ export class OnlineOrderUpdateComponent implements OnInit {
         private router: Router,
         private eventManager: JhiEventManager
 
-    ) {}
+    ) { }
 
     ngOnInit() {
         this.eventSubscriber = this.eventManager.subscribe('changeOnlineOrderItem', response => this.save());
@@ -101,5 +101,9 @@ export class OnlineOrderUpdateComponent implements OnInit {
 
     set onlineOrder(onlineOrder: IOnlineOrder) {
         this._onlineOrder = onlineOrder;
+    }
+
+    ngOnDestroy() {
+        this.eventManager.destroy(this.eventSubscriber);
     }
 }
