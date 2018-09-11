@@ -6,8 +6,8 @@ import { ClientService } from 'app/entities/client';
 import { ICity } from 'app/shared/model/city.model';
 import { IClient } from 'app/shared/model/client.model';
 import { IOnlineOrder } from 'app/shared/model/online-order.model';
-import { JhiAlertService } from 'ng-jhipster';
-import { Observable } from 'rxjs';
+import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
+import { Observable, Subscription } from 'rxjs';
 
 import { OnlineOrderService } from './online-order.service';
 
@@ -19,6 +19,7 @@ export class OnlineOrderUpdateComponent implements OnInit {
     private _onlineOrder: IOnlineOrder;
     isSaving: boolean;
     isNewForm: boolean;
+    eventSubscriber: Subscription;
 
     cities: ICity[];
     clients: IClient[];
@@ -29,11 +30,13 @@ export class OnlineOrderUpdateComponent implements OnInit {
         private cityService: CityService,
         private clientService: ClientService,
         private activatedRoute: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private eventManager: JhiEventManager
 
     ) {}
 
     ngOnInit() {
+        this.eventSubscriber = this.eventManager.subscribe('saveOnlineOrder', response => this.save());
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ onlineOrder }) => {
             this.onlineOrder = onlineOrder;
@@ -73,7 +76,7 @@ export class OnlineOrderUpdateComponent implements OnInit {
 
     private onSaveSuccess() {
         this.isSaving = false;
-        this.previousState();
+        // this.previousState();
     }
 
     private onSaveError() {

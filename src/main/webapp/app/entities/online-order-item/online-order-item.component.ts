@@ -115,6 +115,10 @@ export class OnlineOrderItemComponent implements OnInit, OnDestroy {
     }
 
     onCreate() {
+        this.eventManager.broadcast({
+        name: 'saveOnlineOrder',
+        content: ''
+    });
         this.router.navigate(['online-order-item/new']);
     }
 
@@ -131,4 +135,5 @@ export class OnlineOrderItemComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
     }
+
 }
