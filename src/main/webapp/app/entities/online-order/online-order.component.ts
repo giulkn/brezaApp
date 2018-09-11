@@ -17,6 +17,8 @@ export class OnlineOrderComponent implements OnInit, OnDestroy {
     onlineOrders: IOnlineOrder[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    data: LocalDataSource;
+    mojUrl: String = this.router.url;
 
     settings = {
         mode: 'external',
@@ -63,17 +65,13 @@ export class OnlineOrderComponent implements OnInit, OnDestroy {
         }
     };
 
-    data: LocalDataSource;
-    url = this.route.url;
-
     constructor(
         private onlineOrderService: OnlineOrderService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
         private principal: Principal,
-        private router: Router,
-        private route: ActivatedRoute
-    ) {}
+        private router: Router
+    ) { }
 
     ngOnInit() {
         this.loadAll();
@@ -81,6 +79,7 @@ export class OnlineOrderComponent implements OnInit, OnDestroy {
             this.currentAccount = account;
         });
         this.registerChangeInOnlineOrders();
+        console.log ('mojUrl', this.mojUrl);
     }
 
     loadAll() {
@@ -127,4 +126,5 @@ export class OnlineOrderComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
     }
+
 }
