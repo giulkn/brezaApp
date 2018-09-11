@@ -61,7 +61,7 @@ export class VehicleComponent implements OnInit, OnDestroy {
         },
         attr: {
             class: 'table table-bordered table-success'
-              }
+        }
     };
 
     data: LocalDataSource;
@@ -72,7 +72,7 @@ export class VehicleComponent implements OnInit, OnDestroy {
         private eventManager: JhiEventManager,
         private principal: Principal,
         private router: Router
-    ) {}
+    ) { }
 
     loadAll() {
         this.vehicleService.query().subscribe(
@@ -117,23 +117,36 @@ export class VehicleComponent implements OnInit, OnDestroy {
     onAdd(event) {
         console.log('test VehicleComponent onAdd() event:', event);
         const item: Vehicle = event.newData;
-         if (!this.isInputValid(item)) {
+        if (!this.isInputValid(item)) {
             event.confirm.reject(); // cannot save and must click the cancel button
         } else {
             event.confirm.resolve(item); // updates table and localDataSource
         }
     }
-     onEdit(event) {
+    onEdit(event) {
         console.log('test VehicleComponent onEdit() event:', event);
         const item: Vehicle = event.newData;
-         if (!this.isInputValid(item)) {
+        if (!this.isInputValid(item)) {
             event.confirm.reject();
         } else {
             event.confirm.resolve(item);
         }
     }
 
-        isInputValid(item: Vehicle): boolean {
-            return true;
+    isInputValid(item): boolean {
+        console.log('test VehicleComponent isInputValid() vehicle:', item);
+        if (!item.vehicleNumber || !item.brand || !item.model) {
+            return false;
+        } else if (item.brand.charAt(0) !== item.brand.charAt(0).toUpperCase()) {
+            return false;
+        } else if (item.model.charAt(0) !== item.model.charAt(0).toUpperCase()) {
+            return false;
         }
+        for (let i = item.vehicleNumber.length - 1; i > item.vehicleNumber.length - 4; i--) {
+            if (isNaN(item.vehicleNumber.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
