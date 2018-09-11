@@ -1,6 +1,6 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Principal } from 'app/core';
 import { IOnlineOrder } from 'app/shared/model/online-order.model';
 import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
@@ -64,13 +64,15 @@ export class OnlineOrderComponent implements OnInit, OnDestroy {
     };
 
     data: LocalDataSource;
+    url = this.route.url;
 
     constructor(
         private onlineOrderService: OnlineOrderService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
         private principal: Principal,
-        private router: Router
+        private router: Router,
+        private route: ActivatedRoute
     ) {}
 
     ngOnInit() {
