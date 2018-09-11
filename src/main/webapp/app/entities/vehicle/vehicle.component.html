@@ -9,6 +9,8 @@
             [settings]="settings"
             [source]="data"
             (create)="onCreate()"
-            (custom)="onCustom($event)">
+            (custom)="onCustom($event)"
+            (createConfirm)="onAdd($event)"
+            (editConfirm)="onEdit($event)">
     </ng2-smart-table>
 </div>
