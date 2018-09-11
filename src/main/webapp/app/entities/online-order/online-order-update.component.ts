@@ -36,7 +36,7 @@ export class OnlineOrderUpdateComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.eventSubscriber = this.eventManager.subscribe('saveOnlineOrder', response => this.save());
+        this.eventSubscriber = this.eventManager.subscribe('changeOnlineOrderItem', response => this.save());
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ onlineOrder }) => {
             this.onlineOrder = onlineOrder;

@@ -71,7 +71,7 @@ export class OnlineOrderItemComponent implements OnInit, OnDestroy {
         private principal: Principal,
         private router: Router,
         private route: ActivatedRoute
-    ) {}
+    ) { }
 
     ngOnInit() {
         this.loadAll();
@@ -116,16 +116,24 @@ export class OnlineOrderItemComponent implements OnInit, OnDestroy {
 
     onCreate() {
         this.eventManager.broadcast({
-        name: 'saveOnlineOrder',
-        content: ''
-    });
-        this.router.navigate(['online-order-item/new']);
+            name: 'changeOnlineOrderItem',
+            content: ''
+        });
+        setTimeout(() => this.router.navigate(['online-order-item/new']), 100);
     }
 
     onCustom(event) {
         if (event.action === 'view') {
+            this.eventManager.broadcast({
+                name: 'changeOnlineOrderItem',
+                content: ''
+            });
             this.router.navigate(['online-order-item/' + event.data.id + '/view']);
         } else if (event.action === 'edit') {
+            this.eventManager.broadcast({
+                name: 'changeOnlineOrderItem',
+                content: ''
+            });
             this.router.navigate(['online-order-item/' + event.data.id + '/edit']);
         } else if (event.action === 'delete') {
             this.router.navigate([{ outlets: { popup: 'online-order-item/' + event.data.id + '/delete' } }]);
