@@ -18,7 +18,6 @@ export class OnlineOrderComponent implements OnInit, OnDestroy {
     currentAccount: any;
     eventSubscriber: Subscription;
     data: LocalDataSource;
-    mojUrl: String = this.router.url;
 
     settings = {
         mode: 'external',
@@ -79,7 +78,6 @@ export class OnlineOrderComponent implements OnInit, OnDestroy {
             this.currentAccount = account;
         });
         this.registerChangeInOnlineOrders();
-        console.log ('mojUrl', this.mojUrl);
     }
 
     loadAll() {
