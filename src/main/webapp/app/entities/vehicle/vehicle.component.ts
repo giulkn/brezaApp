@@ -3,7 +3,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
-import { IVehicle } from 'app/shared/model/vehicle.model';
+import { IVehicle, Vehicle } from 'app/shared/model/vehicle.model';
 import { Principal } from 'app/core';
 import { VehicleService } from './vehicle.service';
 import { LocalDataSource } from 'ng2-smart-table';
@@ -116,8 +116,24 @@ export class VehicleComponent implements OnInit, OnDestroy {
     }
     onAdd(event) {
         console.log('test VehicleComponent onAdd() event:', event);
+        const item: Vehicle = event.newData;
+         if (!this.isInputValid(item)) {
+            event.confirm.reject(); // cannot save and must click the cancel button
+        } else {
+            event.confirm.resolve(item); // updates table and localDataSource
+        }
     }
      onEdit(event) {
         console.log('test VehicleComponent onEdit() event:', event);
+        const item: Vehicle = event.newData;
+         if (!this.isInputValid(item)) {
+            event.confirm.reject();
+        } else {
+            event.confirm.resolve(item);
+        }
     }
+
+        isInputValid(item: Vehicle): boolean {
+            return true;
+        }
 }
