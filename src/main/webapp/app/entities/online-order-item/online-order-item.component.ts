@@ -16,6 +16,7 @@ import { OnlineOrderItemService } from './online-order-item.service';
 export class OnlineOrderItemComponent implements OnInit, OnDestroy {
     onlineOrderItems: IOnlineOrderItem[];
     onlineOrderId: number;
+    totalPrice: number = 0;
 
     currentAccount: any;
     eventSubscriber: Subscription;
@@ -96,7 +97,13 @@ export class OnlineOrderItemComponent implements OnInit, OnDestroy {
                     onlineOrderItem.articlePrice = onlineOrderItem.article.price;
                     onlineOrderItem.itemPrice = onlineOrderItem.article.price * onlineOrderItem.orderedAmount;
                     this.data.add(onlineOrderItem);
+                    this.totalPrice += onlineOrderItem.itemPrice;
                 }
+                console.log('TotalPRICE', this.totalPrice)
+                this.eventManager.broadcast({
+                    name: 'onlineOrderTotalPrice',
+                    content: this.totalPrice
+                })
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );

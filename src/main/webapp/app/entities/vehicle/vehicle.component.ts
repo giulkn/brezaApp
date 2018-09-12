@@ -138,6 +138,7 @@ export class VehicleComponent implements OnInit, OnDestroy {
     isInputValid(item): boolean {
         console.log('test VehicleComponent isInputValid() vehicle:', item);
         if (!item.vehicleNumber || !item.brand || !item.model) {
+            console.log('input is invalid');
             return false;
         } else if (item.brand.charAt(0) !== item.brand.charAt(0).toUpperCase()) {
             return false;
@@ -149,6 +150,7 @@ export class VehicleComponent implements OnInit, OnDestroy {
                 return false;
             }
         }
+        console.log('input is valid');
         return true;
     }
 

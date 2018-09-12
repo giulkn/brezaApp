@@ -20,6 +20,7 @@ export class OnlineOrderUpdateComponent implements OnInit, OnDestroy {
     isSaving: boolean;
     isNewForm: boolean;
     eventSubscriber: Subscription;
+    eventSubscriber2: Subscription;
 
     cities: ICity[];
     clients: IClient[];
@@ -37,6 +38,7 @@ export class OnlineOrderUpdateComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.eventSubscriber = this.eventManager.subscribe('changeOnlineOrderItem', response => this.save());
+        this.eventSubscriber2 = this.eventManager.subscribe('onlineOrderTotalPrice', response => this.onlineOrder.totalPrice = response.content);
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ onlineOrder }) => {
             this.onlineOrder = onlineOrder;
