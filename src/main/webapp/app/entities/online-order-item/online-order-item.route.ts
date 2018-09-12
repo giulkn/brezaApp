@@ -1,3 +1,4 @@
+import { OnlineOrder } from './../../shared/model/online-order.model';
 import { HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes } from '@angular/router';
@@ -27,7 +28,7 @@ export class OnlineOrderItemResolve implements Resolve<IOnlineOrderItem> {
 
 export const onlineOrderItemRoute: Routes = [
     {
-        path: 'online-order-item',
+        path: 'online-orderr/:nekiId/online-order-item',
         component: OnlineOrderItemComponent,
         data: {
             authorities: ['ROLE_USER'],
@@ -36,7 +37,7 @@ export const onlineOrderItemRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'online-order-item/:id/view',
+        path: 'online-orderr/:nekiId/online-order-item/:id/view',
         component: OnlineOrderItemDetailComponent,
         resolve: {
             onlineOrderItem: OnlineOrderItemResolve
@@ -48,7 +49,7 @@ export const onlineOrderItemRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'online-order-item/new',
+        path: 'online-orderr/:nekiId/online-order-item/new',
         component: OnlineOrderItemUpdateComponent,
         resolve: {
             onlineOrderItem: OnlineOrderItemResolve
@@ -60,7 +61,7 @@ export const onlineOrderItemRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'online-order-item/:id/edit',
+        path: 'online-orderr/:nekiId/online-order-item/:id/edit',
         component: OnlineOrderItemUpdateComponent,
         resolve: {
             onlineOrderItem: OnlineOrderItemResolve
@@ -75,7 +76,7 @@ export const onlineOrderItemRoute: Routes = [
 
 export const onlineOrderItemPopupRoute: Routes = [
     {
-        path: 'online-order-item/:id/delete',
+        path: 'online-orderr/:nekiId/online-order-item/:id/delete',
         component: OnlineOrderItemDeletePopupComponent,
         resolve: {
             onlineOrderItem: OnlineOrderItemResolve
