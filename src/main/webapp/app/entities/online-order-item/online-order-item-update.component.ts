@@ -49,6 +49,12 @@ export class OnlineOrderItemUpdateComponent implements OnInit {
         );
     }
 
+    calculatePrice() {
+        if (this.onlineOrderItem.orderedAmount && this.onlineOrderItem.article) {
+            this.onlineOrderItem.itemPrice = this.onlineOrderItem.orderedAmount * this.onlineOrderItem.article.price;
+        }
+    }
+
     previousState() {
         window.history.back();
     }
