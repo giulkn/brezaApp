@@ -108,16 +108,16 @@ export class OnlineOrderComponent implements OnInit, OnDestroy {
     }
 
     onCreate() {
-        this.router.navigate(['online-order/new']);
+        this.router.navigate(['online-orderr/new']);
     }
 
     onCustom(event) {
         if (event.action === 'view') {
-            this.router.navigate(['online-order/' + event.data.id + '/view']);
+            this.router.navigate(['online-orderr/' + event.data.id + '/view']);
         } else if (event.action === 'edit') {
-            this.router.navigate(['online-order/' + event.data.id + '/edit']);
+            this.router.navigate(['online-orderr/' + event.data.id + '/edit']);
         } else if (event.action === 'delete') {
-            this.router.navigate([{ outlets: { popup: 'online-order/' + event.data.id + '/delete' } }]);
+            this.router.navigate([{ outlets: { popup: 'online-orderr/' + event.data.id + '/delete' } }]);
         }
     }
 

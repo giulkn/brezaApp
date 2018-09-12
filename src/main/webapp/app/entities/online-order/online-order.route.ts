@@ -27,7 +27,7 @@ export class OnlineOrderResolve implements Resolve<IOnlineOrder> {
 
 export const onlineOrderRoute: Routes = [
     {
-        path: 'online-order',
+        path: 'online-orderr',
         component: OnlineOrderComponent,
         data: {
             authorities: ['ROLE_USER'],
@@ -36,7 +36,7 @@ export const onlineOrderRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'online-order/:id/view',
+        path: 'online-orderr/:id/view',
         component: OnlineOrderDetailComponent,
         resolve: {
             onlineOrder: OnlineOrderResolve
@@ -48,7 +48,7 @@ export const onlineOrderRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'online-order/new',
+        path: 'online-orderr/new',
         component: OnlineOrderUpdateComponent,
         resolve: {
             onlineOrder: OnlineOrderResolve
@@ -60,7 +60,7 @@ export const onlineOrderRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'online-order/:id/edit',
+        path: 'online-orderr/:id/edit',
         component: OnlineOrderUpdateComponent,
         resolve: {
             onlineOrder: OnlineOrderResolve
@@ -75,7 +75,7 @@ export const onlineOrderRoute: Routes = [
 
 export const onlineOrderPopupRoute: Routes = [
     {
-        path: 'online-order/:id/delete',
+        path: 'online-orderr/:id/delete',
         component: OnlineOrderDeletePopupComponent,
         resolve: {
             onlineOrder: OnlineOrderResolve
