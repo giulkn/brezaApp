@@ -3,7 +3,7 @@
     "brezaApp": {
         "onlineOrderItem" : {
             "home": {
-                "title": "Online Order Items",
+                "title": "Naručeni ајтеми",
                 "createLabel": "Kreiraj novi Online Order Item",
                 "createOrEditLabel": "Kreirajte ili izmenite Online Order Item"
             },
@@ -14,7 +14,7 @@
                 "question": "Da li ste sigurni da želite da obrišete Online Order Item pod nazivom {{ id }}?"
             },
             "detail": {
-                "title": "Online Order Item"
+                "title": "Наручени ајтеми"
             },
             "orderedAmount": "Ordered Amount",
             "itemPrice": "Item Price",
