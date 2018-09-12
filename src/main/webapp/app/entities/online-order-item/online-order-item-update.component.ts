@@ -1,3 +1,5 @@
+import { OnlineOrder } from './../../shared/model/online-order.model';
+import { OnlineOrderItem } from './../../shared/model/online-order-item.model';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -18,6 +20,7 @@ import { OnlineOrderItemService } from './online-order-item.service';
 export class OnlineOrderItemUpdateComponent implements OnInit {
     private _onlineOrderItem: IOnlineOrderItem;
     isSaving: boolean;
+    idd: number;
 
     onlineorders: IOnlineOrder[];
     articles: IArticle[];
@@ -27,7 +30,8 @@ export class OnlineOrderItemUpdateComponent implements OnInit {
         private onlineOrderItemService: OnlineOrderItemService,
         private onlineOrderService: OnlineOrderService,
         private articleService: ArticleService,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private route: ActivatedRoute
     ) {}
 
     ngOnInit() {
@@ -35,9 +39,13 @@ export class OnlineOrderItemUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ onlineOrderItem }) => {
             this.onlineOrderItem = onlineOrderItem;
         });
-        this.onlineOrderService.query().subscribe(
-            (res: HttpResponse<IOnlineOrder[]>) => {
-                this.onlineorders = res.body;
+        this.route.params.subscribe(params => {
+            this.idd = params['nekiId'];
+            console.log(this.idd, 'IDD JE')
+        });
+        this.onlineOrderService.find(this.idd).subscribe(
+            (res: HttpResponse<IOnlineOrder>) => {
+                this.onlineOrderItem.onlineOrder = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
