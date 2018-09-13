@@ -1,0 +1,58 @@
+{
+    "name": "DeliveryOrder",
+    "fields": [
+        {
+            "fieldName": "deliveryDate",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+            ]
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "warehouseClerk",
+            "otherEntityName": "employee",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "driver",
+            "otherEntityName": "employee",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "onlineOrder",
+            "otherEntityName": "onlineOrder",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "deliveryOrder",
+            "relationshipValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "vehicle",
+            "otherEntityName": "vehicle",
+            "otherEntityField": "vehicleNumber"
+        }
+    ],
+    "changelogDate": "20180904113044",
+    "entityTableName": "delivery_order",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
