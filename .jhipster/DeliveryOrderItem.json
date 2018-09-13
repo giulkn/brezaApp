@@ -1,0 +1,54 @@
+{
+    "name": "DeliveryOrderItem",
+    "fields": [
+        {
+            "fieldName": "preparedAmount",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": 1
+        },
+        {
+            "fieldName": "deliveredAmount",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": 1
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "onlineOrderItem",
+            "otherEntityName": "onlineOrderItem",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "deliveryOrderItem",
+            "relationshipValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "deliveryOrder",
+            "otherEntityName": "deliveryOrder",
+            "otherEntityField": "id",
+            "relationshipValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20180904113045",
+    "entityTableName": "delivery_order_item",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

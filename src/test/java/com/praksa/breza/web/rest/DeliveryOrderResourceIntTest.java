@@ -142,6 +142,24 @@ public class DeliveryOrderResourceIntTest {
 
     @Test
     @Transactional
+    public void checkDeliveryDateIsRequired() throws Exception {
+        int databaseSizeBeforeTest = deliveryOrderRepository.findAll().size();
+        // set the field null
+        deliveryOrder.setDeliveryDate(null);
+
+        // Create the DeliveryOrder, which fails.
+
+        restDeliveryOrderMockMvc.perform(post("/api/delivery-orders")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(deliveryOrder)))
+            .andExpect(status().isBadRequest());
+
+        List<DeliveryOrder> deliveryOrderList = deliveryOrderRepository.findAll();
+        assertThat(deliveryOrderList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void checkStatusIsRequired() throws Exception {
         int databaseSizeBeforeTest = deliveryOrderRepository.findAll().size();
         // set the field null

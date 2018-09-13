@@ -22,7 +22,8 @@ public class DeliveryOrder implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "delivery_date")
+    @NotNull
+    @Column(name = "delivery_date", nullable = false)
     private LocalDate deliveryDate;
 
     @NotNull
