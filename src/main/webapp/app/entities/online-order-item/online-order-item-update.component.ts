@@ -85,9 +85,10 @@ export class OnlineOrderItemUpdateComponent implements OnInit {
         result.subscribe((res: HttpResponse<IOnlineOrderItem>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
     }
 
-    private onSaveSuccess() {
+    private onSaveSuccess(event) {
         this.isSaving = false;
-        this.previousState();
+        //this.previousState();
+        this.router.navigate(['online-orderr/' + this.idd +'/edit']);
     }
 
     private onSaveError() {
