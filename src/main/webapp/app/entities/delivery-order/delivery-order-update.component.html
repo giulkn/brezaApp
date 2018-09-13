@@ -13,16 +13,10 @@
                     <label class="form-control-label" jhiTranslate="brezaApp.deliveryOrder.deliveryDate" for="field_deliveryDate">Delivery Date</label>
                     <div class="input-group">
                         <input id="field_deliveryDate" type="text" class="form-control" name="deliveryDate" ngbDatepicker  #deliveryDateDp="ngbDatepicker" [(ngModel)]="deliveryOrder.deliveryDate"
-                        required/>
+                        />
                         <span class="input-group-append">
                             <button type="button" class="btn btn-secondary" (click)="deliveryDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
                         </span>
-                    </div>
-                    <div [hidden]="!(editForm.controls.deliveryDate?.dirty && editForm.controls.deliveryDate?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.deliveryDate?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
                     </div>
                 </div>
                 <div class="form-group">

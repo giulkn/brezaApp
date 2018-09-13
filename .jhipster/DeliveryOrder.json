@@ -5,7 +5,6 @@
             "fieldName": "deliveryDate",
             "fieldType": "LocalDate",
             "fieldValidateRules": [
-                "required"
             ]
         },
         {

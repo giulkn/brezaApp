@@ -146,42 +146,6 @@ public class DeliveryOrderItemResourceIntTest {
 
     @Test
     @Transactional
-    public void checkPreparedAmountIsRequired() throws Exception {
-        int databaseSizeBeforeTest = deliveryOrderItemRepository.findAll().size();
-        // set the field null
-        deliveryOrderItem.setPreparedAmount(null);
-
-        // Create the DeliveryOrderItem, which fails.
-
-        restDeliveryOrderItemMockMvc.perform(post("/api/delivery-order-items")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(deliveryOrderItem)))
-            .andExpect(status().isBadRequest());
-
-        List<DeliveryOrderItem> deliveryOrderItemList = deliveryOrderItemRepository.findAll();
-        assertThat(deliveryOrderItemList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkDeliveredAmountIsRequired() throws Exception {
-        int databaseSizeBeforeTest = deliveryOrderItemRepository.findAll().size();
-        // set the field null
-        deliveryOrderItem.setDeliveredAmount(null);
-
-        // Create the DeliveryOrderItem, which fails.
-
-        restDeliveryOrderItemMockMvc.perform(post("/api/delivery-order-items")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(deliveryOrderItem)))
-            .andExpect(status().isBadRequest());
-
-        List<DeliveryOrderItem> deliveryOrderItemList = deliveryOrderItemRepository.findAll();
-        assertThat(deliveryOrderItemList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllDeliveryOrderItems() throws Exception {
         // Initialize the database
         deliveryOrderItemRepository.saveAndFlush(deliveryOrderItem);

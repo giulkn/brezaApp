@@ -23,11 +23,11 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="prepared_amount" type="bigint">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
 
             <column name="delivered_amount" type="bigint">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
             <column name="online_order_item_id" type="bigint">
                 <constraints unique="true" nullable="false" uniqueConstraintName="ux_delivery_order_item_online_order_item_id" />

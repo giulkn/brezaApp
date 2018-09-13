@@ -21,14 +21,12 @@ public class DeliveryOrderItem implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
     @Min(value = 1L)
-    @Column(name = "prepared_amount", nullable = false)
+    @Column(name = "prepared_amount")
     private Long preparedAmount;
 
-    @NotNull
     @Min(value = 1L)
-    @Column(name = "delivered_amount", nullable = false)
+    @Column(name = "delivered_amount")
     private Long deliveredAmount;
 
     @OneToOne(optional = false)
