@@ -2,7 +2,7 @@ import { OnlineOrder } from './../../shared/model/online-order.model';
 import { OnlineOrderItem } from './../../shared/model/online-order-item.model';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ArticleService } from 'app/entities/article';
 import { OnlineOrderService } from 'app/entities/online-order';
 import { IArticle } from 'app/shared/model/article.model';
@@ -31,7 +31,8 @@ export class OnlineOrderItemUpdateComponent implements OnInit {
         private onlineOrderService: OnlineOrderService,
         private articleService: ArticleService,
         private activatedRoute: ActivatedRoute,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private router: Router
     ) {}
 
     ngOnInit() {
@@ -67,6 +68,10 @@ export class OnlineOrderItemUpdateComponent implements OnInit {
         window.history.back();
     }
 
+    reloadRoute() {
+        window.location.reload()
+    }
+
     save() {
         this.isSaving = true;
         if (this.onlineOrderItem.id !== undefined) {
@@ -89,6 +94,20 @@ export class OnlineOrderItemUpdateComponent implements OnInit {
         this.isSaving = false;
     }
 
+    private subscribeToSaveResponse1(result: Observable<HttpResponse<IOnlineOrderItem>>) {
+        result.subscribe((res: HttpResponse<IOnlineOrderItem>) => this.onSaveSuccess1(), (res: HttpErrorResponse) => this.onSaveError1());
+    }
+
+    private onSaveSuccess1() {
+        this.isSaving = false;
+        this.router.navigateByUrl('', {skipLocationChange: true}).then(()=>
+        this.router.navigate(['online-orderr/' + this.idd +'/online-order-item/new']));
+    }
+
+    private onSaveError1() {
+        this.isSaving = false;
+    }
+
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
@@ -108,4 +127,14 @@ export class OnlineOrderItemUpdateComponent implements OnInit {
     set onlineOrderItem(onlineOrderItem: IOnlineOrderItem) {
         this._onlineOrderItem = onlineOrderItem;
     }
+
+    next() {
+        this.isSaving = true;
+        if (this.onlineOrderItem.id !== undefined) {
+            this.subscribeToSaveResponse1(this.onlineOrderItemService.update(this.onlineOrderItem));
+        } else {
+            this.subscribeToSaveResponse1(this.onlineOrderItemService.create(this.onlineOrderItem));
+        }
+    }
+
 }
