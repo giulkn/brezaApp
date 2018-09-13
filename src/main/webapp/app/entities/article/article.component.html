@@ -1,0 +1,15 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="brezaApp.article.home.title">Articles</span>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="articles">
+        <ng2-smart-table
+            [settings]="settings"
+            [source]="data"
+            (create)="onCreate()"
+            (custom)="onCustom($event)">
+        </ng2-smart-table>
+    </div>
+</div>
