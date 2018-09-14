@@ -102,6 +102,7 @@ public class DeliveryOrderItemResource {
         Optional<DeliveryOrderItem> deliveryOrderItem = deliveryOrderItemRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(deliveryOrderItem);
     }
+
     /**
      * GET /delivery-order-items/delivery-orders/{deliveryOrderId} : all the DeliveryOrderItems by deliveryOrder id.
      *
@@ -129,4 +130,5 @@ public class DeliveryOrderItemResource {
         deliveryOrderItemRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
 }
