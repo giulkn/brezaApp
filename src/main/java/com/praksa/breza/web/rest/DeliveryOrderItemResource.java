@@ -102,6 +102,18 @@ public class DeliveryOrderItemResource {
         Optional<DeliveryOrderItem> deliveryOrderItem = deliveryOrderItemRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(deliveryOrderItem);
     }
+    /**
+     * GET /delivery-order-items/delivery-orders/{deliveryOrderId} : all the DeliveryOrderItems by deliveryOrder id.
+     *
+     * @param id the id of the deliveryOrder
+     * @return a list of DeliveryOrderItems or an empty list
+     */
+    @GetMapping("/delivery-order-items/delivery-orders/{deliveryOrderId}")
+    @Timed
+    public List<DeliveryOrderItem> getOnlineOrderItemsByDeliveryOrderId(@PathVariable Long deliveryOrderId) {
+        log.debug("REST request to get DeliveryOrderItems By DeliveryOrder Id : {}", deliveryOrderId);
+        return deliveryOrderItemRepository.findByDeliveryOrderId(deliveryOrderId);
+    }
 
     /**
      * DELETE  /delivery-order-items/:id : delete the "id" deliveryOrderItem.

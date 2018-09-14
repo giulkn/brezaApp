@@ -11,5 +11,6 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface DeliveryOrderItemRepository extends JpaRepository<DeliveryOrderItem, Long> {
+    List<DeliveryOrderItem> findByDeliveryOrderId(Long deliveryOrderId);
 
 }

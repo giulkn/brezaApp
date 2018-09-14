@@ -19,6 +19,10 @@ export class DeliveryOrderItemService {
         return this.http.post<IDeliveryOrderItem>(this.resourceUrl, deliveryOrderItem, { observe: 'response' });
     }
 
+    findByDeliveryOrderId(deliveryOrderId: number): Observable<EntityArrayResponseType> {
+        return this.http.get<IDeliveryOrderItem[]>(`${this.resourceUrl}/delivery-orders/${deliveryOrderId}`, { observe: 'response' });
+    }
+
     update(deliveryOrderItem: IDeliveryOrderItem): Observable<EntityResponseType> {
         return this.http.put<IDeliveryOrderItem>(this.resourceUrl, deliveryOrderItem, { observe: 'response' });
     }
